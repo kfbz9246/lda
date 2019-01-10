@@ -10,7 +10,7 @@ from lda_gibbs_sampler import lda_posterior
 import matplotlib
 matplotlib.use('Agg')
 from matplotlib.pyplot import figure
-from cPickle import load()
+from cPickle import load
 
 subunits_distrobutions = [[.6,.4,0,0,0,0,0,0,0,0],
                           [0,.1,.6,.3,0,0,0,0,0,0],
@@ -49,15 +49,11 @@ data *= 100000
 
 
 lda_posterior(data,number_components, 'test_output', 1000, 1001)
-'''
-for components_index in range(7):
-    fig = figure(figsize=(11, 11), dpi=96, frameon=True)
-    fig_ax = fig.add_subplot(111)
-    fig_ax.hist(component_distrobution_samples[0, components_index], 100)
-    fig.savefig(str(components_index)+'.png', bbox_inches='tight')
-'''
-exit()
-subunit_distrobution_samples = []
+
+samples_file = open('test_output/1000')
+subunit_distrobution_samples = load(samples_file)['subunit_distrobution_samples']
+samples_file.close()
+
 for subunits_index in range(10):
     fig = figure(figsize=(11, 11), dpi=96, frameon=True)
     fig_ax = fig.add_subplot(111)
